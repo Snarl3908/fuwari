@@ -1,5 +1,5 @@
 // astro.config.mjs
-import { baseConfig } from './src/content/baseConfig.js';
+import { baseConfig } from './src/content/baseConfig.ts';
 import sitemap from '@astrojs/sitemap';
 import svelte from '@astrojs/svelte';
 import tailwind from '@astrojs/tailwind';
