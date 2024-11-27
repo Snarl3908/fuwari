@@ -1,0 +1,25 @@
+---
+// 导入必要的组件和工具
+import ArchivePanel from '@components/ArchivePanel.astro'
+import I18nKey from '@i18n/i18nKey'
+import { i18n } from '@i18n/translation'
+import MainGridLayout from '@layouts/MainGridLayout.astro'
+import { getCategoryList } from '@utils/content-utils'
+
+// 生成所有分类的静态路径
+export async function getStaticPaths() {
+  const categories = await getCategoryList()
+  // 为每个分类生成路由参数
+  // 使用 categoryItem 而不是 category 以避免与路由参数冲突
+  return categories.map(categoryItem => ({
+    params: { category: categoryItem.name },
+  }))
+}
+
+// 获取当前页面的分类参数
+const category = Astro.params.category as string
+---
+
+<MainGridLayout title={i18n(I18nKey.archive)} description={i18n(I18nKey.archive)}>
+    <ArchivePanel categories={[category]}></ArchivePanel>
+</MainGridLayout>

@@ -1,29 +1,31 @@
 ---
+// 导入必要的组件和工具
 import ArchivePanel from '@components/ArchivePanel.astro'
 import I18nKey from '@i18n/i18nKey'
 import { i18n } from '@i18n/translation'
 import MainGridLayout from '@layouts/MainGridLayout.astro'
 import { getSortedPosts } from '@utils/content-utils'
 
+// 生成所有标签的静态路径
 export async function getStaticPaths() {
   const posts = await getSortedPosts()
-
-  // タグを集めるための Set の型を指定
+  // 收集所有唯一的标签
   const allTags = posts.reduce<Set<string>>((acc, post) => {
-    // biome-ignore lint/complexity/noForEach: <explanation>
-    post.data.tags.forEach(tag => acc.add(tag))
+    // 使用 for...of 替代 forEach 以符合 linter 规则
+    // 使用 tagName 而不是 tag 以避免与路由参数冲突
+    for (const tagName of post.data.tags) {
+      acc.add(tagName)
+    }
     return acc
   }, new Set())
 
-  const allTagsArray = Array.from(allTags)
-
-  return allTagsArray.map(tag => ({
-    params: {
-      tags: tag,
-    },
+  // 为每个标签生成路由参数
+  return Array.from(allTags).map(tagName => ({
+    params: { tag: tagName },
   }))
 }
 
+// 获取当前页面的标签参数
 const tag = Astro.params.tag as string
 ---
 
