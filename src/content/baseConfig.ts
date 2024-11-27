@@ -1,7 +1,7 @@
 // ./src/content/baseConfig.js
 
 export const baseConfig = {
-  site: 'https://fuwari-dj9.pages.dev/',
+  site: 'https://fuwari.vercel.app/',
   base: '/',
   trailingSlash: 'always',
 };
