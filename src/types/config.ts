@@ -26,6 +26,13 @@ export type SiteConfig = {
   }
 
   favicon: Favicon[]
+
+  analytics: {
+    ga4: {
+      enable: boolean
+      measurementId?: string
+    }
+  }
 }
 
 export type Favicon = {

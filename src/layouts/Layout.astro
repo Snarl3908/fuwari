@@ -151,6 +151,19 @@ const bannerOffset =
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
 
+		{siteConfig.analytics.ga4.enable && siteConfig.analytics.ga4.measurementId && (
+			<>
+				<!-- Google Analytics 4 -->
+				<script async src={`https://www.googletagmanager.com/gtag/js?id=${siteConfig.analytics.ga4.measurementId}`}></script>
+				<script define:vars={{ measurementId: siteConfig.analytics.ga4.measurementId }}>
+					window.dataLayer = window.dataLayer || [];
+					function gtag(){dataLayer.push(arguments);}
+					gtag('js', new Date());
+					gtag('config', measurementId);
+				</script>
+			</>
+		)}
+
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
