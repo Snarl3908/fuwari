@@ -17,8 +17,9 @@ Un tema estático para blogs construido con [Astro](https://astro.build).
 - [x] Colores del tema y banner personalizables
 - [x] Diseño responsivo
 - [ ] Comentarios
-- [x] Buscador
-- [ ] TOC (Tabla de Contenidos)
+- [x] Búsqueda
+- [ ] Tabla de contenidos
+- [x] Integración con Google Analytics 4
 
 ## 🚀 Cómo Usar
 
@@ -56,3 +57,30 @@ Todos los comandos se ejecutan desde la raíz del proyecto, desde una terminal:
 | `pnpm new-post <nombre-de-archivo>` | Crea una nueva entrada                            |
 | `pnpm astro ...`                    | Ejecuta comandos CLI como `astro add`, `astro check` |
 | `pnpm astro --help`                 | Obtén ayuda para usar el CLI de Astro             |
+
+## 🚀 Google Analytics 4
+
+> Fecha de adición: 2023-11-28
+
+Fuwari admite la integración con Google Analytics 4, que está desactivada por defecto. Para habilitar el seguimiento de GA4:
+
+1. Obtén tu ID de medición de GA4 (formato: G-XXXXXXXXXX) desde tu cuenta de Google Analytics
+2. Abre `src/config.ts`
+3. Encuentra la sección `analytics` y actualiza la configuración:
+```typescript
+analytics: {
+  ga4: {
+    enable: true,                    // Establece como true para habilitar GA4
+    measurementId: 'G-XXXXXXXXXX',   // Reemplaza con tu ID de medición de GA4
+  }
+}
+```
+
+El código de seguimiento de GA4 solo se incluirá en la compilación cuando `enable` esté establecido como `true` y se proporcione un `measurementId` válido. Esto asegura un rendimiento óptimo cuando GA4 no está en uso.
+
+Características principales de la integración con GA4:
+- 🔒 Desactivado por defecto para privacidad y rendimiento
+- 🔄 Fácil de activar/desactivar mediante configuración
+- 🚀 Sin impacto en el tamaño de compilación cuando está desactivado
+- 📊 Soporta todas las funciones estándar de seguimiento de GA4
+- 🛠 Configuración basada en archivos sin modificación de código

@@ -19,6 +19,7 @@
 - [ ] コメント機能
 - [x] 検索機能
 - [ ] 目次
+- [x] Google Analytics 4 統合
 
 ## 🚀 使用方法
 
@@ -56,3 +57,30 @@ draft: false
 | `pnpm new-post <filename>`          | 新しい投稿を作成                                    |
 | `pnpm astro ...`                    | `astro add`, `astro check` の様なコマンドを実行する際に使用 |
 | `pnpm astro --help`                 | Astro CLIのヘルプを表示                            |
+
+## 🚀 Google Analytics 4
+
+> 追加日付：2023-11-28
+
+FuwariはGoogle Analytics 4の統合をサポートしており、デフォルトでは無効になっています。GA4トラッキングを有効にするには：
+
+1. Google Analyticsアカウントから GA4 測定ID（形式：G-XXXXXXXXXX）を取得
+2. `src/config.ts`を開く
+3. `analytics`セクションを見つけて設定を更新：
+```typescript
+analytics: {
+  ga4: {
+    enable: true,                    // GA4を有効にするにはtrueに設定
+    measurementId: 'G-XXXXXXXXXX',   // あなたのGA4測定IDに置き換え
+  }
+}
+```
+
+GA4トラッキングコードは、`enable`が`true`に設定され、有効な`measurementId`が提供されている場合にのみビルド出力に含まれます。これにより、GA4を使用しない場合の最適なパフォーマンスが確保されます。
+
+GA4統合の主な特徴：
+- 🔒 プライバシーとパフォーマンスのためデフォルトで無効
+- 🔄 設定ファイルで簡単に有効/無効切り替え
+- 🚀 無効時はビルドサイズへの影響なし
+- 📊 すべての標準GA4トラッキング機能をサポート
+- 🛠 コード修正不要の設定ベースセットアップ

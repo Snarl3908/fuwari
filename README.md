@@ -23,6 +23,34 @@ A static blog template built with [Astro](https://astro.build).
 - [ ] Comments
 - [x] Search
 - [ ] TOC
+- [x] Google Analytics 4 integration
+
+## 🚀 Google Analytics 4
+
+> Added: 2023-11-28
+
+Fuwari supports Google Analytics 4 integration, which is disabled by default. To enable GA4 tracking:
+
+1. Get your GA4 Measurement ID (format: G-XXXXXXXXXX) from your Google Analytics account
+2. Open `src/config.ts`
+3. Find the `analytics` section and update the configuration:
+```typescript
+analytics: {
+  ga4: {
+    enable: true,                    // Set to true to enable GA4
+    measurementId: 'G-XXXXXXXXXX',   // Replace with your GA4 measurement ID
+  }
+}
+```
+
+The GA4 tracking code will only be included in the build output when both `enable` is set to `true` and a valid `measurementId` is provided. This ensures optimal performance when GA4 is not in use.
+
+Key features of the GA4 integration:
+- 🔒 Disabled by default for privacy and performance
+- 🔄 Easy to enable/disable via configuration
+- 🚀 Zero impact on build size when disabled
+- 📊 Supports all standard GA4 tracking features
+- 🛠 Configuration-based setup without code modification
 
 ## 🚀 How to Use
 
